@@ -184,62 +184,57 @@
       <p>Fill in the data below.</p>
       <?php
       include('./pages/db.php');
-
       if (isset($_POST['submit'])) {
-        $name = $_POST['name'];
-        $city = $_POST['city'];
-        $salery = $_POST['salary'];
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-        $attendees = $_POST['attendees'];
-        $msalary = $_POST['msalary'];
+        if (isset($_FILES["image"])) {
 
-        $query = mysqli_query($con, "INSERT INTO `registere_emp`(`id`, `name`, `city`, `salary`, `email`, `password`, `attendees`, `msalary`) VALUES ('','$name','$city','$salery ','$email','$password','$attendees ',' $msalary ')");
-        if ($query) {
-          // echo " <script>alert('employee Added!!!')</script>";
-          echo " <script>document.location='register.php'</script>";
+          $destination = "images/" . basename($_FILES["image"]["name"]);
+          move_uploaded_file($_FILES["image"]["tmp_name"], $destination);
         } else {
-          echo "somthing went wrong";
+          echo "Wrong";
         }
       }
       ?>
-      <form class="requires-validation" method="post" action="">
+      <form class="requires-validation" method="post" action="" enctype="multipart/form-data">
 
         <div class="col-md-12">
           <label for="name">Full Name</label>
-          <input class="form-control" type="text" name="name" placeholder="Full Name" required>
+          <input class="form-control" type="text" name="name" placeholder="Full Name">
         </div>
         <div class="col-md-12">
           <label for="name">City </label>
-          <input class="form-control" type="text" name="city" placeholder="City Name" required>
+          <input class="form-control" type="text" name="city" placeholder="City Name">
         </div>
         <div class="col-md-12">
           <label for="name">Salary</label>
-          <input class="form-control" type="text" name="salary" placeholder="Salary" required>
+          <input class="form-control" type="text" name="salary" placeholder="Salary">
         </div>
         <div class="col-md-12">
           <label for="name">Email</label>
-          <input class="form-control" type="email" name="email" placeholder="E-mail Address" required>
+          <input class="form-control" type="email" name="email" placeholder="E-mail Address">
         </div>
         <div class="col-md-12">
           <label for="name">Password</label>
-          <input class="form-control" type="password" name="password" placeholder="Password" required>
+          <input class="form-control" type="password" name="password" placeholder="Password">
         </div>
         <div class="col-md-12 mt-3">
           <label class="mb-3 mr-1" for="gender">Gender: </label>
 
-          <input type="radio" class="btn-check" name="gender" id="male" autocomplete="off" required>
+          <input type="radio" class="btn-check" name="gender" id="male" autocomplete="off">
           <label class="btn btn-sm btn-outline-secondary" for="male">Male</label>
 
-          <input type="radio" class="btn-check" name="gender" id="female" autocomplete="off" required>
+          <input type="radio" class="btn-check" name="gender" id="female" autocomplete="off">
           <label class="btn btn-sm btn-outline-secondary" for="female">Female</label>
 
-          <input type="radio" class="btn-check" name="gender" id="secret" autocomplete="off" required>
+          <input type="radio" class="btn-check" name="gender" id="secret" autocomplete="off">
           <label class="btn btn-sm btn-outline-secondary" for="secret">Secret</label>
 
+          <div class="form-group">
+            <label for="" class="fw-bold">Image</label>
+            <input type="file" class="form-control" name="image">
+          </div>
         </div>
         <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+          <input class="form-check-input" type="checkbox" value="" id="invalidCheck">
           <label class="form-check-label">I confirm that all data are correct</label>
         </div>
         <div class="form-button mt-3">
