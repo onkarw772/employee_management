@@ -28,16 +28,25 @@
 
 
             <li>
-                <a class="active-menu" href="register.php"><i class="fa fa-dashboard fa-3x"></i> Dashbord </a>
+                <?php
+                $currentUrl = $_SERVER['REQUEST_URI'];
+                $path = parse_url($currentUrl, PHP_URL_PATH);
+
+                // Get the last part of the path, which represents the page or resource name
+                $parts = explode('/', $path);
+                $last_part = end($parts);
+
+                ?>
+                <a class="<?= $last_part == 'index.php' ? "active-menu" : "" ?>" href="index.php"><i class="fa fa-dashboard fa-3x"></i> Dashbord </a>
             </li>
             <li>
-                <a href="register.php"><i class="fa fa-desktop fa-3x"></i> Register Here</a>
+                <a class="<?= $last_part == 'register.php' ? "active-menu" : "" ?>" href="register.php"><i class="fa fa-desktop fa-3x"></i> Register Here</a>
             </li>
             <li>
-                <a href="empdetails.php"><i class="fa fa-qrcode fa-3x"></i> Employee Details</a>
+                <a class="<?= $last_part == 'empdetails.php' ? "active-menu" : "" ?>" href="empdetails.php"><i class="fa fa-qrcode fa-3x"></i> Employee Details</a>
             </li>
             <li>
-                <a href="record.php"><i class="fa fa-bar-chart-o fa-3x"></i> Record</a>
+                <a class="<?= $last_part == 'record.php' ? "active-menu" : "" ?>" href="record.php"><i class="fa fa-bar-chart-o fa-3x"></i> Record</a>
             </li>
             <li>
                 <a href="table.php"><i class="fa fa-table fa-3x"></i> Table Examples</a>
@@ -84,8 +93,8 @@
 </nav>
 <!-- /. NAV SIDE  -->
 
-<body>
 
+<body>
 </body>
 
 </html>
